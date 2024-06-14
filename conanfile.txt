@@ -1,0 +1,8 @@
+[requires]
+crowcpp-crow/1.1.0
+libpq/15.4
+nlohmann_json/3.11.3
+
+[generators]
+CMakeDeps
+CMakeToolchain

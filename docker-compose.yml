@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  server:
+    build: .
+    container_name: cpp_service
+    ports:
+      - '3000:3000'
+    depends_on:
+      - db
+  db:
+    image: postgres:14.1-alpine
+    container_name: postgres_db_cpp
+    restart: always
+    mem_limit: "1gb"
+    mem_reservation: "512m"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=cpp_library
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./catalog_book_db_book_initial.sql:/docker-entrypoint-initdb.d/data.sql
+      - ./postgres-data:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
+  
